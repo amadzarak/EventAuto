@@ -11,6 +11,10 @@ builder.Services.AddDbContext<ProfileContext>(opt =>
     opt.UseInMemoryDatabase("Profiles"));
 builder.Services.AddDbContext<VenueContext>(opt =>
     opt.UseInMemoryDatabase("VenueList"));
+builder.Services.AddDbContext<TicketContext>(opt =>
+    opt.UseInMemoryDatabase("Tickets"));
+builder.Services.AddDbContext<OrganizationContext>(opt =>
+    opt.UseInMemoryDatabase("OrganizationsList"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

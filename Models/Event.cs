@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace EventAuto.Models;
 
 
 public class EventObject
 {
+    [Key]
+    public long Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public DateTime CreatedAt { get; set; }
@@ -14,6 +18,7 @@ public class EventObject
     public List<Person> EventCoHosts { get; set; } = new List<Person>();
 
 
+    public EventObject() { }
     public EventObject(string name, Venue venue)
     {
         Name = name;

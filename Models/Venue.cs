@@ -14,6 +14,8 @@ public enum LeadStatus
 }
 public class Venue : IOrganization
 {
+    [Key]
+    public long Id { get; set; }
     public string Name { get; set; } = null!;
     public AddressObject Address { get; set; } = null!;
     public VenueType Type { get; set; }
@@ -47,6 +49,7 @@ public class Venue : IOrganization
         Console.WriteLine("Events hosted at this venue:");
     }
 
+    public Venue() { }
     public Venue(string name, AddressObject address)
     {
         Name = name;

@@ -1,6 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace EventAuto.Models;
 public class Ticket
 {
+    [Key]
+    public long Id { get; set; }
     public EventObject TicketEvent { get; set; } = null!;
     public User TicketHolder { get; set; } = null!;
     public bool Purchased { get; set; }

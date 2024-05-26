@@ -9,5 +9,5 @@ public class EventContext : DbContext
     {
     }
 
-    public DbSet<Event> EventList { get; set; } = null!;
+    public DbSet<EventObject> EventList { get; set; } = null!;
 }

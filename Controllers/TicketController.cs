@@ -11,47 +11,47 @@ namespace EventAuto.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventListController : ControllerBase
+    public class TicketController : ControllerBase
     {
-        private readonly EventContext _context;
+        private readonly TicketContext _context;
 
-        public EventListController(EventContext context)
+        public TicketController(TicketContext context)
         {
             _context = context;
         }
 
-        // GET: api/EventList
+        // GET: api/Ticket
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventObject>>> GetEventList()
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
         {
-            return await _context.EventList.ToListAsync();
+            return await _context.Tickets.ToListAsync();
         }
 
-        // GET: api/EventList/5
+        // GET: api/Ticket/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EventObject>> GetEvent(long id)
+        public async Task<ActionResult<Ticket>> GetTicket(long id)
         {
-            var @event = await _context.EventList.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(id);
 
-            if (@event == null)
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            return @event;
+            return ticket;
         }
 
-        // PUT: api/EventList/5
+        // PUT: api/Ticket/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(long id, EventObject @event)
+        public async Task<IActionResult> PutTicket(long id, Ticket ticket)
         {
-            if (id != @event.Id)
+            if (id != ticket.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(@event).State = EntityState.Modified;
+            _context.Entry(ticket).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace EventAuto.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EventExists(id))
+                if (!TicketExists(id))
                 {
                     return NotFound();
                 }
@@ -72,37 +72,36 @@ namespace EventAuto.Controllers
             return NoContent();
         }
 
-        // POST: api/EventList
+        // POST: api/Ticket
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EventObject>> PostEvent(EventObject @event)
+        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
         {
-            _context.EventList.Add(@event);
+            _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
-            //return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
-            return CreatedAtAction(nameof(PostEvent), new { id = @event.Id }, @event);
+            return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
         }
 
-        // DELETE: api/EventList/5
+        // DELETE: api/Ticket/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEvent(long id)
+        public async Task<IActionResult> DeleteTicket(long id)
         {
-            var @event = await _context.EventList.FindAsync(id);
-            if (@event == null)
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null)
             {
                 return NotFound();
             }
 
-            _context.EventList.Remove(@event);
+            _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EventExists(long id)
+        private bool TicketExists(long id)
         {
-            return _context.EventList.Any(e => e.Id == id);
+            return _context.Tickets.Any(e => e.Id == id);
         }
     }
 }
